@@ -4,12 +4,18 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   background: #343541;
   color: #ececf1;
-  height: 100vh;
-  overflow: hidden;
 }
 
 .app {
@@ -42,22 +48,26 @@ body {
   color: #9ca3af;
 }
 
-/* Main Content - UPDATED GRID */
+/* Main Content */
 .main-content {
   display: grid;
-  grid-template-columns: 60% 40%; /* Preview 60%, Chat 40% */
-  flex: 1;
+  grid-template-columns: 60% 40%;
   height: calc(100vh - 73px);
   overflow: hidden;
+  gap: 0;
+  margin: 0;
+  padding: 0;
 }
+
 
 /* PDF Preview - LEFT PANEL */
 .preview-panel {
   background: #444654;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #4a4a4a; /* border now on right */
+  border-right: 1px solid #4a4a4a;
   overflow-y: auto;
+  width: 100%;
 }
 
 /* Chat Panel - RIGHT PANEL */
@@ -65,7 +75,6 @@ body {
   background: #343541;
   display: flex;
   flex-direction: column;
-  /* no border on right */
   overflow-y: hidden;
 }
 
@@ -223,7 +232,7 @@ body {
   justify-content: center;
 }
 
-/* File Upload Component - Dark theme */
+/* File Upload Component */
 .upload-zone {
   border: 2px dashed #565869 !important;
   background: #40414f !important;
@@ -260,6 +269,7 @@ body {
   justify-content: center;
   color: #9ca3af;
 }
+
 /* Typing indicator */
 .typing-indicator {
   display: flex;
@@ -288,4 +298,10 @@ body {
 @keyframes typing {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
+}
+#root, .app {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
