@@ -1,34 +1,55 @@
+/* ---------------------------------------
+   App.css — Orange Morphic Theme + Responsive
+   Keeps structure untouched. Full file.
+   --------------------------------------- */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+/* ensure React root/container uses full viewport */
+#root, html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
-
-body {
+  background: #f8f8f8;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: #343541;
-  color: #ececf1;
+  color: #1a1a1a;
 }
 
+/* App container */
 .app {
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(15px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Theme Colors === */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-dark: rgba(240, 240, 240, 0.6);
+  --border-glass: rgba(255, 255, 255, 0.3);
+  --text-main: #222;
+  --text-muted: #555;
+  --accent: #ffb35b; /* soft orange accent */
+  --accent-strong: rgba(255,179,91,0.9);
 }
 
 /* Header */
 .header {
-  background: #202123;
-  border-bottom: 1px solid #4a4a4a;
+  background: var(--glass-dark);
+  border-bottom: 1px solid var(--border-glass);
   padding: 12px 0;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .header-content {
@@ -39,43 +60,51 @@ body {
 
 .header-title {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--accent);
   margin-bottom: 4px;
+  letter-spacing: 0.5px;
 }
 
 .header-subtitle {
   font-size: 12px;
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 
 /* Main Content */
 .main-content {
   display: grid;
   grid-template-columns: 60% 40%;
-  height: calc(100vh - 73px);
+  flex: 1;
+  height: calc(100vh - 73px); /* header height accounted for */
   overflow: hidden;
   gap: 0;
   margin: 0;
   padding: 0;
+  transition: all 320ms ease; /* smooth when switching layouts */
 }
-
 
 /* PDF Preview - LEFT PANEL */
 .preview-panel {
-  background: #444654;
+  background: var(--glass-bg);
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #4a4a4a;
+  border-right: 1px solid var(--border-glass);
   overflow-y: auto;
   width: 100%;
+  backdrop-filter: blur(30px);
+  transition: box-shadow 220ms ease, transform 320ms ease;
 }
 
 /* Chat Panel - RIGHT PANEL */
 .chat-panel {
-  background: #343541;
+  background: rgba(255, 255, 255, 0.45);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
+  backdrop-filter: blur(20px);
+  border-left: 1px solid var(--border-glass);
+  transition: box-shadow 220ms ease, transform 320ms ease;
 }
 
 /* Chat Interface */
@@ -97,29 +126,31 @@ body {
 .empty-chat {
   text-align: center;
   padding: 40px 20px;
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 
 .empty-chat-icon {
   font-size: 48px;
   margin-bottom: 16px;
+  color: var(--accent);
 }
 
 .empty-chat h3 {
   font-size: 18px;
   margin-bottom: 8px;
-  color: #ececf1;
+  color: var(--text-main);
 }
 
 .empty-chat p {
   font-size: 14px;
+  color: var(--text-muted);
 }
 
 /* Messages */
 .message {
   display: flex;
-  padding: 24px 0;
-  border-bottom: 1px solid #4a4a4a;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .message:last-child {
@@ -127,23 +158,31 @@ body {
 }
 
 .message.user {
-  background: #343541;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  border-radius: 8px;
+  margin: 8px 0;
 }
 
 .message.assistant {
-  background: #444654;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 8px;
+  margin: 8px 0;
 }
 
 .message-avatar {
   width: 30px;
   height: 30px;
-  border-radius: 2px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 16px;
   margin-left: 16px;
   font-size: 16px;
+  background: var(--accent);
+  color: white;
 }
 
 .message-content {
@@ -151,13 +190,15 @@ body {
   padding-right: 16px;
   line-height: 1.5;
   white-space: pre-wrap;
+  color: var(--text-main);
 }
 
 /* Input Area */
 .input-container {
-  padding: 24px;
-  background: #343541;
-  border-top: 1px solid #4a4a4a;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  border-top: 1px solid var(--border-glass);
+  backdrop-filter: blur(20px);
 }
 
 .input-form {
@@ -174,53 +215,44 @@ body {
 .message-input {
   width: 100%;
   padding: 12px 48px 12px 16px;
-  background: #40414f;
-  border: 1px solid #565869;
-  border-radius: 6px;
-  color: #ececf1;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  color: var(--text-main);
   font-size: 16px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(15px);
 }
 
 .message-input:focus {
-  border-color: #8b8b9a;
-}
-
-.message-input:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  border-color: var(--accent);
+  box-shadow: 0 0 6px rgba(255, 179, 91, 0.4);
 }
 
 .send-button {
   position: absolute;
   right: 8px;
-  background: none;
+  background: var(--accent);
   border: none;
-  color: #8e8ea0;
+  color: white;
   cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
+  padding: 8px 10px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.2s;
 }
 
 .send-button:hover:not(:disabled) {
-  color: #ececf1;
-  background: #565869;
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(255, 179, 91, 0.5);
 }
 
 .send-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-}
-
-.input-disclaimer {
-  text-align: center;
-  font-size: 12px;
-  color: #9ca3af;
-  margin-top: 12px;
 }
 
 /* Upload Container */
@@ -232,32 +264,32 @@ body {
   justify-content: center;
 }
 
-/* File Upload Component */
 .upload-zone {
-  border: 2px dashed #565869 !important;
-  background: #40414f !important;
-  color: #ececf1;
-  border-radius: 8px;
+  border: 2px dashed rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text-main);
+  border-radius: 12px;
   padding: 60px 40px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
   max-width: 400px;
   width: 100%;
+  backdrop-filter: blur(20px);
 }
 
 .upload-zone.dragging {
-  border-color: #10a37f !important;
-  background: #40414f !important;
+  border-color: var(--accent);
+  background: rgba(255, 179, 91, 0.2);
 }
 
 .upload-zone h3 {
-  color: #ececf1;
+  color: var(--text-main);
   margin-bottom: 8px;
 }
 
 .upload-zone p {
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 
 /* PDF Preview */
@@ -267,7 +299,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 
 /* Typing indicator */
@@ -280,7 +312,7 @@ body {
 .typing-indicator span {
   height: 8px;
   width: 8px;
-  background: #9ca3af;
+  background: var(--accent);
   border-radius: 50%;
   display: block;
   margin: 0 2px;
@@ -299,9 +331,88 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
 }
-#root, .app {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+
+/* -------------------------
+   RESPONSIVE: mobile / tablet
+   ------------------------- */
+
+/* When width is small, stack preview above chat (like ChatGPT mobile)
+   We change grid -> flex column so DOM order remains (preview first),
+   maintain smooth transition and allow vertical scrolling.
+*/
+@media (max-width: 900px) {
+  /* allow page to scroll vertically when stacked */
+  #root, html, body, .app {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .preview-panel,
+  .chat-panel {
+    width: 100%;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 8px 30px rgba(255, 140, 50, 0.06);
+    transform: translateZ(0); /* improve composite performance */
+  }
+
+  .preview-panel {
+    order: 0; /* ensure preview on top */
+    border-right: none;
+    border-left: none;
+  }
+
+  .chat-panel {
+    order: 1;
+    border-left: none;
+    border-right: none;
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .header-title { font-size: 15px; }
+  .header-subtitle { font-size: 12px; }
+
+  .input-container { padding: 14px; }
+  .message-input { font-size: 15px; padding: 10px 40px 10px 14px; }
+  .send-button { right: 6px; padding: 6px 8px; }
+}
+
+/* Extra small screens (phones) - tighten spacing */
+@media (max-width: 600px) {
+  .main-content { gap: 10px; padding: 10px; }
+  .preview-panel, .chat-panel { padding: 10px; border-radius: 12px; }
+  .upload-container { padding: 20px; }
+  .upload-zone { padding: 36px 24px; }
+  .empty-chat { padding: 28px 16px; }
+  .message-avatar { width: 28px; height: 28px; margin-left: 12px; margin-right: 12px; }
+}
+
+/* Small visual enhancement for desktop: subtle accent glow on upload or active state */
+.preview-panel.has-file {
+  box-shadow: 0 8px 40px rgba(255, 160, 80, 0.08);
+  border-right: 1px solid rgba(255,179,91,0.12);
+}
+
+/* optional: subtle pulse on accent (unobtrusive) */
+@keyframes accentPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,179,91,0.08); }
+  70% { box-shadow: 0 0 0 10px rgba(255,179,91,0.0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,179,91,0.0); }
+}
+
+/* apply pulse when uploading (add class .is-uploading to body or preview-panel when needed) */
+.is-uploading .upload-zone {
+  animation: accentPulse 1.8s infinite;
 }
