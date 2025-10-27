@@ -29,7 +29,7 @@ function App() {
       {/* Header */}
       <header className="header">
         <div className="header-content">
-          <h1 className="header-title">PDF AI Assistant</h1>
+          <h1 className="header-title">PdfINTELLI</h1>
           <div className="header-subtitle">
             Chat with your PDF like you chat with ChatGPT
           </div>
